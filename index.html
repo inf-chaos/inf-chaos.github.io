@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<title> Infinite Chaos Calculator </title>
+	<link rel="icon" href="./image/chaos.webp">
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<table>
+	<tr class="table-header">
+		<td>
+		</td>
+		<td>
+			Current shard costs <br>
+			<img src="./image/shardofpurification.png">
+		</td>
+		<td>
+			Current market prices <br>
+			<img src="./image/gold.png">
+		</td>
+		<td rowspan="10">
+			<img src="./image/shardofpurification.png"> <br>
+			You currently have <br>
+			<input id="shard-count" type="number" value="0" onfocus="this.select()"> <br>
+			<button type="button" onclick="calculate()">Calculate</button>
+		</td>
+		<td colspan="2">
+			Recommended purchases
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/leap.png">
+				<span data-item-grade="3"> Honor Leapstone </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="leap-cost" type="number" value="100" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="leap-price" type="number" value="24" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="leap-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/leap.png">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/greatleap.png">
+				<span data-item-grade="3"> Great Honor Leapstone </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="great-leap-cost" type="number" value="130" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="great-leap-price" type="number" value="116" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="great-leap-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/greatleap.png">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/shardpouch.png">
+				<span data-item-grade="4"> Honor Shard Pouch (L) </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="shard-pouch-cost" type="number" value="500" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="shard-pouch-price" type="number" value="110" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="shard-pouch-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/shardpouch.png">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/destruction.png">
+				<span data-item-grade="1"> Destruction Stone Crystal (x10) </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="destruction-cost" type="number" value="60" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="destruction-price" type="number" value="20" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="destruction-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/destruction.png">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/guardian.png">
+				<span data-item-grade="1"> Guardian Stone Crystal (x10) </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="guardian-cost" type="number" value="10" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="guardian-price" type="number" value="14" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="guardian-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/guardian.png">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/powder.png">
+				<span data-item-grade="4"> Powder of Sage </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="powder-cost" type="number" value="1470" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="powder-price" type="number" value="146" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="powder-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/powder.png">
+		</td>
+
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/solargrace.png">
+				<span data-item-grade="2"> Solar Grace </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="solar-grace-cost" type="number" value="550" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="solar-grace-price" type="number" value="34" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="solar-grace-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/solargrace.png">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/solarblessing.png">
+				<span data-item-grade="3"> Solar Blessing </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="solar-blessing-cost" type="number" value="570" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="solar-blessing-price" type="number" value="131" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="solar-blessing-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/solarblessing.png">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/solarprotection.png">
+				<span data-item-grade="4"> Solar Protection </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="solar-protection-cost" type="number" value="590" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="solar-protection-price" type="number" value="280" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="solar-protection-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/solarprotection.png">
+		</td>
+	</tr>
+</table>
+</body>
+</html>

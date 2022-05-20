@@ -1,0 +1,80 @@
+html {background-color: black}
+
+input {
+    width: 100px;
+    padding: 5px;
+    text-align: right;
+    background: transparent !important;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+span {
+ padding-left: 10px;
+ padding-right: 10px;
+}
+
+table {
+ padding: 10px;
+ border-radius: 1em;
+ height: 380px;
+ width: 1000px;
+ margin: auto;
+ background-color: #cad9d9;
+ box-shadow: rgba(255, 255, 255, 0.19) 0px 10px 20px, rgba(255, 255, 255, 0.23) 0px 6px 6px;
+}
+
+.table-header {
+ font-family: impact, sans-serif;
+ font-size: 20px;
+ color: #ffffff;
+ font-style: normal;
+ font-weight: normal;
+ font-variant: normal;
+ text-align: center;
+ letter-spacing: 0px;
+ line-height: 30px;
+ text-shadow: 2px 2px 2px #000000;
+}
+
+.item {
+ display: flex;
+ align-items: center;
+ font-size: 20px;
+ text-shadow: 1px 1px 1px #000000;
+}
+
+.input-cell {
+ text-align: center;
+}
+
+td[data-recommended-output="true"] {
+ text-align: right;
+ font-size:30px;
+ width: 100px;
+}
+
+/* Rarity-based colors */
+span[data-item-grade="1"]{color:#a5a5a5}
+span[data-item-grade="2"]{color:#6bbd00}
+span[data-item-grade="3"]{color:#00b0fa}
+span[data-item-grade="4"]{color:#ba00f9}
+span[data-item-grade="5"]{color:#f99200}
+span[data-item-grade="6"]{color:#fa5d00}
+span[data-item-grade="7"]{color:#b3956c}
+span[data-item-grade="8"]{color:#14c5b9}
+span[data-item-grade="9"]{color:#f3f}
+span[data-item-grade="10"]{color:#0f0}
