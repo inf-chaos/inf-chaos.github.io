@@ -146,7 +146,8 @@ function calculate() {
 	var leap_recommended = great_leap_recommended = shard_pouch_recommended = 0;
 	var destruction_recommended = guardian_recommended = powder_recommended = 0;
 	var solar_grace_recommended = solar_blessing_recommended = solar_protection_recommended = 0;
-	while (shard_count >= buy_priority[0].cost) {
+	var lack_data = "";
+	while (shard_count >= buy_priority[0].cost && lack_data == "") {
 		recommended = buy_priority.shift();
 		shard_count -= recommended.cost;
 		switch(recommended.name) {
@@ -154,47 +155,73 @@ function calculate() {
 				leap_recommended++;
 				leap_trimmed = leap_trimmed.slice(1);
 				buy_priority = insertWithPriority(buy_priority, kLeap, leap_price, leap_trimmed[0]);				
+				if (!leap_trimmed.length) {
+					lack_data = kLeap;
+				}
 				break;
 			case kGreatLeap:
 				great_leap_recommended++;
 				great_leap_trimmed = great_leap_trimmed.slice(1);
-				buy_priority = insertWithPriority(buy_priority, kGreatLeap, great_leap_price, great_leap_trimmed[0]);				
+				buy_priority = insertWithPriority(buy_priority, kGreatLeap, great_leap_price, great_leap_trimmed[0]);
+				if (!great_leap_trimmed.length) {
+					lack_data = kGreatLeap;
+				}
 				break;
 			case kShardPouch:
 				shard_pouch_recommended++;
 				shard_pouch_trimmed = shard_pouch_trimmed.slice(1);
-				buy_priority = insertWithPriority(buy_priority, kShardPouch, shard_pouch_price, shard_pouch_trimmed[0]);				
+				buy_priority = insertWithPriority(buy_priority, kShardPouch, shard_pouch_price, shard_pouch_trimmed[0]);
+				if (!shard_pouch_trimmed.length) {
+					lack_data = kShardPouch;
+				}
 				break;
 			case kDestruction:
 				destruction_recommended++;
 				destruction_trimmed = destruction_trimmed.slice(1);
-				buy_priority = insertWithPriority(buy_priority, kDestruction, destruction_price, destruction_trimmed[0]);				
+				buy_priority = insertWithPriority(buy_priority, kDestruction, destruction_price, destruction_trimmed[0]);
+				if (!destruction_trimmed.length) {
+					lack_data = kDestruction;
+				}
 				break;
 			case kGuardian:
 				guardian_recommended++;
 				guardian_trimmed = guardian_trimmed.slice(1);
-				buy_priority = insertWithPriority(buy_priority, kGuardian, guardian_price, guardian_trimmed[0]);				
+				buy_priority = insertWithPriority(buy_priority, kGuardian, guardian_price, guardian_trimmed[0]);
+				if (!guardian_trimmed.length) {
+					lack_data = kGuardian;
+				}
 				break;
 			case kPowder:
 				powder_recommended++;
 				powder_trimmed = powder_trimmed.slice(1);
-				buy_priority = insertWithPriority(buy_priority, kPowder, powder_price, powder_trimmed[0]);				
+				buy_priority = insertWithPriority(buy_priority, kPowder, powder_price, powder_trimmed[0]);
+				if (!powder_trimmed.length) {
+					lack_data = kPowder;
+				}
 				break;
 			case kSolarGrace:
 				solar_grace_recommended++;
 				solar_grace_trimmed = solar_grace_trimmed.slice(1);
 				buy_priority = insertWithPriority(buy_priority, kSolarGrace, solar_grace_price, solar_grace_trimmed[0]);
-				console.log(solar_grace_trimmed);
+				if (!solar_grace_trimmed.length) {
+					lack_data = kSolarGrace;
+				}
 				break;
 			case kSolarBlessing:
 				solar_blessing_recommended++;
 				solar_blessing_trimmed = solar_blessing_trimmed.slice(1);
-				buy_priority = insertWithPriority(buy_priority, kSolarBlessing, solar_blessing_price, solar_blessing_trimmed[0]);				
+				buy_priority = insertWithPriority(buy_priority, kSolarBlessing, solar_blessing_price, solar_blessing_trimmed[0]);
+				if (!solar_blessing_trimmed.length) {
+					lack_data = kSolarBlessing;
+				}
 				break;
 			case kSolarProtection:
 				solar_protection_recommended++;
 				solar_protection_trimmed = solar_protection_trimmed.slice(1);
-				buy_priority = insertWithPriority(buy_priority, kSolarProtection, solar_protection_price, solar_protection_trimmed[0]);				
+				buy_priority = insertWithPriority(buy_priority, kSolarProtection, solar_protection_price, solar_protection_trimmed[0]);
+				if (!solar_protection_trimmed.length) {
+					lack_data = kSolarProtection;
+				}
 				break;
 			default:
 				break;
@@ -210,4 +237,10 @@ function calculate() {
 	document.getElementById("solar-grace-recommended").textContent = solar_grace_recommended;
 	document.getElementById("solar-blessing-recommended").textContent = solar_blessing_recommended;	
 	document.getElementById("solar-protection-recommended").textContent = solar_protection_recommended;
+	if (lack_data != "") {
+		var warning_block = "The calculator has run out of existing data to make an informed decision about the next purchase.<br><br>";
+		warning_block += "Please inform KD004#004 on Discord about the upcoming price for:<br><br>";
+		warning_block += lack_data;
+		document.getElementById("lack-data").innerHTML = warning_block;
+	}
 }

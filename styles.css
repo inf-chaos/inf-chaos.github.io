@@ -67,6 +67,16 @@ td[data-recommended-output="true"] {
  width: 100px;
 }
 
+td[id="lack-data-col"] 
+{
+  table-layout:fixed;
+  width: 180px;
+  overflow:hidden;
+  word-wrap:break-word;
+  vertical-align: top;
+  text-align: center;
+}
+
 /* Rarity-based colors */
 span[data-item-grade="1"]{color:#a5a5a5}
 span[data-item-grade="2"]{color:#6bbd00}
