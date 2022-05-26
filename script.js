@@ -21,14 +21,12 @@ kSolarProtection = "Solar Protection";
 kStoneOfChaos = "Stone of Chaos";
 
 // Trigger the "calculate" button when "enter" is pressed
-document.addEventListener('DOMContentLoaded', function () {
-	var shard_count_input = document.getElementById("shard-count");
-	shard_count_input.addEventListener("keypress", function(event) {
-		if (event.key === "Enter") {
-			event.preventDefault();
-			document.getElementById("calculate-button").click();
-		}
-	});
+var shard_count_input = document.getElementById("shard-count");
+shard_count_input.addEventListener("keypress", function(event) {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		document.getElementById("calculate-button").click();
+	}
 });
 
 function insertWithPriority(array, element, element_price, element_cost) {
