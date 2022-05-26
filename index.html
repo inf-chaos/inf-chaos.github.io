@@ -20,11 +20,11 @@
 			Current market prices <br>
 			<img src="./image/gold.png">
 		</td>
-		<td rowspan="6">
+		<td rowspan="4" id="calculate-cell">
 			<img src="./image/shardofpurification.png"> <br>
 			You currently have <br>
 			<input id="shard-count" type="number" value="0" onfocus="this.select()"> <br>
-			<button type="button" onclick="calculate()">Calculate</button>
+			<button type="button" onclick="calculate()" id="calculate-button">Calculate</button>
 		</td>
 		<td colspan="2">
 			Recommended purchases
@@ -103,6 +103,9 @@
 		<td class="input-cell">
 			<input id="solar-grace-price" type="number" value="34" onfocus="this.select()">
 		</td>
+		<td rowspan="4" id="lack-data-col">
+			<div id="lack-data"></div>
+		</td>
 		<td data-recommended-output="true">
 			<span id="solar-grace-recommended"> 0 </span>
 		</td>
@@ -142,9 +145,6 @@
 		</td>
 		<td class="input-cell">
 			<input id="solar-protection-price" type="number" value="280" onfocus="this.select()">
-		</td>
-		<td rowspan="4" id="lack-data-col">
-			<div id="lack-data"></div>
 		</td>
 		<td data-recommended-output="true">
 			<span id="solar-protection-recommended"> 0 </span>
@@ -186,6 +186,13 @@
 		<td class="input-cell">
 			<input id="guardian-price" type="number" value="14" onfocus="this.select()">
 		</td>
+		<td rowspan="3" id="stone-of-chaos-note">
+			<div>
+				<b>Note for <u>Stone of Chaos</u>:</b><br>
+				<li>Since this item is bound (untradable) and is sold at the NPC for 500g - 1000g each, the gold price is whatever you value the stone at.<br></li>
+				<li>Set its "Current market price" to 0 if you want the calculator to exclude the stone from the optimized purchase sequence.</li>
+			</div>
+		</td>
 		<td data-recommended-output="true">
 			<span id="guardian-recommended"> 0 </span>
 		</td>
@@ -212,8 +219,28 @@
 		<td>
 			<img src="./image/powder.png">
 		</td>
-
 	</tr>
+	<tr>
+		<td>
+			<div class="item">
+				<img src="./image/stoneofchaos.png">
+				<span data-item-grade="6"> Stone of Chaos </span>
+			</div>
+		</td>
+		<td class="input-cell">
+			<input id="stone-of-chaos-cost" type="number" value="2000" onfocus="this.select()">
+		</td>
+		<td class="input-cell">
+			<input id="stone-of-chaos-price" type="number" value="500" onfocus="this.select()">
+		</td>
+		<td data-recommended-output="true">
+			<span id="stone-of-chaos-recommended"> 0 </span>
+		</td>
+		<td>
+			<img src="./image/stoneofchaos.png">
+		</td>
+	</tr>
+
 </table>
 </body>
 </html>

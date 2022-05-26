@@ -7,6 +7,7 @@ powder = [1470, 1640, 1820, 2020, 2240, 2470, 2730, 3010, 3320, 3650, 4020, 4420
 solar_grace = [550, 630, 710, 800, 890, 990, 1100, 1220, 1340, 1480, 1630, 1790, 1970, 2160, 2370, 2600, 2850, 3120, 3420, 3750, 4110, 4500, 4920, 5390, 5900, 6460, 7080, 7760, 8500, 9310]
 solar_blessing = [570, 650, 730, 820, 920, 1020, 1080, 1130, 1260, 1390, 1530, 1680, 1850, 2030, 2230, 2450, 2690, 2940, 3230, 3530, 3870, 4240, 4640, 5080, 5570, 6100, 6680, 7320, 8020, 8780, 9630]
 solar_protection = [590, 670, 760, 850, 950, 1060, 1170, 1290, 1430, 1580, 1740, 1910, 2100, 2300, 2530, 2770, 3040, 3330, 3650, 3990, 4370, 4790, 5250, 5750, 6300, 6900, 7560, 8280, 9070, 9940]
+stone_of_chaos = [2000, 2320, 2690, 3110, 3580, 4130, 4750, 5470, 6280, 7220, 8300, 9530, 10950, 12570, 14440, 16580, 19040, 21870, 25120]
 
 kLeap = "Honor Leapstone";
 kGreatLeap = "Great Honor Leapstone";
@@ -17,6 +18,18 @@ kPowder = "Powder of Sage";
 kSolarGrace = "Solar Grace";
 kSolarBlessing = "Solar Blessing";
 kSolarProtection = "Solar Protection";
+kStoneOfChaos = "Stone of Chaos";
+
+// Trigger the "calculate" button when "enter" is pressed
+window.onload=function(){
+	var shard_count_input = document.getElementById("shard-count");
+	shard_count_input.addEventListener("keypress", function(event) {
+		if (event.key === "Enter") {
+			event.preventDefault();
+			document.getElementById("calculate-button").click();
+		}
+	});
+}
 
 function insertWithPriority(array, element, element_price, element_cost) {
 	element_priority = element_price / element_cost;
@@ -60,6 +73,7 @@ function calculate() {
 	var solar_grace_cost = document.getElementById("solar-grace-cost").value;
 	var solar_blessing_cost = document.getElementById("solar-blessing-cost").value;
 	var solar_protection_cost = document.getElementById("solar-protection-cost").value;
+	var stone_of_chaos_cost = document.getElementById("stone-of-chaos-cost").value;
 
 	var leap_cost_index = leap.findIndex((element) => element == leap_cost);
 	var great_leap_cost_index = great_leap.findIndex((element) => element == great_leap_cost);
@@ -70,6 +84,7 @@ function calculate() {
 	var solar_grace_cost_index = solar_grace.findIndex((element) => element == solar_grace_cost);
 	var solar_blessing_cost_index = solar_blessing.findIndex((element) => element == solar_blessing_cost);
 	var solar_protection_cost_index = solar_protection.findIndex((element) => element == solar_protection_cost);
+	var stone_of_chaos_cost_index = stone_of_chaos.findIndex((element) => element == stone_of_chaos_cost);
 
 	var leap_price = document.getElementById("leap-price").value;
 	var great_leap_price = document.getElementById("great-leap-price").value;
@@ -80,6 +95,7 @@ function calculate() {
 	var solar_grace_price = document.getElementById("solar-grace-price").value;
 	var solar_blessing_price = document.getElementById("solar-blessing-price").value;
 	var solar_protection_price = document.getElementById("solar-protection-price").value;
+	var stone_of_chaos_price = document.getElementById("stone-of-chaos-price").value;
 
 	// Handle errors if the given cost does not match database
 	var error = "";
@@ -101,17 +117,17 @@ function calculate() {
 	if (powder_cost_index == -1) {
 		error = kPowder;
 	}
-
 	if (solar_grace_cost_index == -1) {
 		error = kSolarGrace;
 	}
-
 	if (solar_blessing_cost_index == -1) {
 		error = kSolarBlessing;
 	}
-
 	if (solar_protection_cost_index == -1) {
 		error = kSolarProtection;
+	}
+	if (stone_of_chaos_cost_index == -1) {
+		error = kStoneOfChaos;
 	}
 	if (error != "") {
 		alert(error + "'s shard cost does not exist in database.");
@@ -129,6 +145,7 @@ function calculate() {
 	var solar_grace_trimmed = solar_grace.slice(solar_grace_cost_index);
 	var solar_blessing_trimmed = solar_blessing.slice(solar_blessing_cost_index);
 	var solar_protection_trimmed = solar_protection.slice(solar_protection_cost_index);
+	var stone_of_chaos_trimmed = stone_of_chaos.slice(stone_of_chaos_cost_index);
 	
 	var buy_priority = [];
 	buy_priority = insertWithPriority(buy_priority, kLeap, leap_price, leap_trimmed[0]);
@@ -140,12 +157,14 @@ function calculate() {
 	buy_priority = insertWithPriority(buy_priority, kSolarGrace, solar_grace_price, solar_grace_trimmed[0]);
 	buy_priority = insertWithPriority(buy_priority, kSolarBlessing, solar_blessing_price, solar_blessing_trimmed[0]);
 	buy_priority = insertWithPriority(buy_priority, kSolarProtection, solar_protection_price, solar_protection_trimmed[0]);
+	buy_priority = insertWithPriority(buy_priority, kStoneOfChaos, stone_of_chaos_price, stone_of_chaos_trimmed[0]);
 
 	// Start looping to find optimized buy sequence
 	var shard_count = document.getElementById("shard-count").value;
 	var leap_recommended = great_leap_recommended = shard_pouch_recommended = 0;
 	var destruction_recommended = guardian_recommended = powder_recommended = 0;
 	var solar_grace_recommended = solar_blessing_recommended = solar_protection_recommended = 0;
+	var stone_of_chaos_recommended = 0;
 	var lack_data = "";
 	while (shard_count >= buy_priority[0].cost && lack_data == "") {
 		recommended = buy_priority.shift();
@@ -223,6 +242,14 @@ function calculate() {
 					lack_data = kSolarProtection;
 				}
 				break;
+			case kStoneOfChaos:
+				stone_of_chaos_recommended++;
+				stone_of_chaos_trimmed = stone_of_chaos_trimmed.slice(1);
+				buy_priority = insertWithPriority(buy_priority, kStoneOfChaos, stone_of_chaos_price, stone_of_chaos_trimmed[0]);
+				if (!stone_of_chaos_trimmed.length) {
+					lack_data = kStoneOfChaos;
+				}
+				break;
 			default:
 				break;
 		}
@@ -237,6 +264,7 @@ function calculate() {
 	document.getElementById("solar-grace-recommended").textContent = solar_grace_recommended;
 	document.getElementById("solar-blessing-recommended").textContent = solar_blessing_recommended;	
 	document.getElementById("solar-protection-recommended").textContent = solar_protection_recommended;
+	document.getElementById("stone-of-chaos-recommended").textContent = stone_of_chaos_recommended;
 	if (lack_data != "") {
 		var warning_block = "The calculator has run out of existing data to make an informed decision about the next purchase.<br><br>";
 		warning_block += "Please inform KD004#004 on Discord about the upcoming price for:<br><br>";

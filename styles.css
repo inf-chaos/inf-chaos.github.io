@@ -67,8 +67,7 @@ td[data-recommended-output="true"] {
  width: 100px;
 }
 
-td[id="lack-data-col"] 
-{
+td[id="lack-data-col"] {
   table-layout:fixed;
   width: 180px;
   overflow:hidden;
@@ -76,6 +75,16 @@ td[id="lack-data-col"]
   vertical-align: top;
   text-align: center;
 }
+
+td[id="calculate-cell"] {
+  vertical-align: bottom;
+  padding-bottom: 20px;
+}
+
+td[id="stone-of-chaos-note"] {
+  text-align: justify;
+}
+
 
 /* Rarity-based colors */
 span[data-item-grade="1"]{color:#a5a5a5}
