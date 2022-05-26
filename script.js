@@ -242,5 +242,7 @@ function calculate() {
 		warning_block += "Please inform KD004#004 on Discord about the upcoming price for:<br><br>";
 		warning_block += lack_data;
 		document.getElementById("lack-data").innerHTML = warning_block;
+	} else {
+		document.getElementById("lack-data").innerHTML = "";	
 	}
 }
